@@ -1,0 +1,40 @@
+.app-header {
+position: fixed;
+}
+
+.app-content {
+padding: 112px 48px;
+z-index: -1;
+}
+
+.logo {
+
+    .mat-icon {
+        height: 40px;
+
+        &.large {
+        width: 80px;
+        }
+
+        &.small {
+        margin-left: 12px;
+        width: 40px;
+        }
+
+        &.svg.image {
+            border: 2px;
+        }
+    }
+
+}
+
+.mls-intro {
+    text-align: center;
+    width: 560px;
+}
+
+// center an element
+.middle {
+    margin-left: auto;
+    margin-right: auto;
+}
