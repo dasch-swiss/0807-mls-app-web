@@ -22,10 +22,16 @@
    margin: 0 auto;
  }
  
- .app-link {
-   cursor: pointer;
- 
-   &:hover {
-     background: rgba(204,204,204,.5);
-   }
- }
+ // center an element
+.middle {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.app-link {
+  cursor: pointer;
+
+  &:hover {
+    background: rgba(204,204,204,.5);
+  }
+}

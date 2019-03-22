@@ -187,7 +187,7 @@ export class SearchResultComponent implements OnInit {
                   }
                   // append results to search results
                   this.result = this.result.concat(resources.resources);
-                  console.log(this.result);
+                  // console.log(this.result);
                   this.loading = false;
 
               },

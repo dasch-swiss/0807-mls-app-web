@@ -28,7 +28,7 @@ export class ResourceComponent implements OnInit {
     this.loading = true;
 
     this._route.queryParams.subscribe(queryParams => {
-        console.log(queryParams);
+        // console.log(queryParams);
     });
 
     this._route.params.subscribe((params: Params) => {
@@ -40,7 +40,7 @@ export class ResourceComponent implements OnInit {
   getResource(id: string) {
     this._resourceService.getReadResource(decodeURIComponent(id)).subscribe(
         (result: ReadResourcesSequence) => {
-            console.log(result);
+            // console.log(result);
             this.resource = result;
 
             this.ontologyInfo = result.ontologyInformation;
