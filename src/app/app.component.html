@@ -7,19 +7,11 @@
 
   <span class="center">
     <!-- search panel: fulltext and extended search -->
-    <kui-search [route]="'/search/'"></kui-search>
+    <kui-fulltext-search [route]="'/search'"></kui-fulltext-search>
   </span>
 
 </mat-toolbar>
 
 <div class="app-content">
-
-  <div class="mls-intro middle">
-    <img width="300" alt="MLS Logo" src="assets/images/mls-logo.svg">
-    <h3>Die Musikgeschichte der Schweiz auf einen Klick: Das Musiklexikon der Schweiz (MLS)</h3>
-    <p>Warum ein neues Musiklexikon?
-    Die Schweiz verfügt im Gegensatz zu anderen europäischen Ländern über kein modernes Nachschlagewerk zur Musikgeschichte. Die bestehenden Lexika sind veraltet und werden der Vielfalt und dem Reichtum des Musiklebens der Schweiz nicht gerecht. Ein neues, wissenschaftlich fundiertes Musiklexikon wird schon seit Jahrzehnten verlangt. Diese Forderung nach fundiertem Wissen über die Schweizer Musik hat mit dem 2012 in die Bundesverfassung aufgenommenen Artikel 67a zur Stärkung der musikalischen Bildung eine neue Aktualität gewonnen: Um die neue Verfassungsbestimmung umzusetzen braucht es ein zeitgemässes Informationssystem zur Schweizer Musikgeschichte auf wissenschaftlicher Basis.</p>
-  </div>
-
-    <router-outlet></router-outlet>
+  <router-outlet></router-outlet>
 </div>

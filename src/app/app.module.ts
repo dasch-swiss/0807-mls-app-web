@@ -24,6 +24,7 @@ import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { ResourceComponent } from './resource/resource.component';
 import { SearchResultComponent } from './search-result/search-result.component';
+import { HomepageComponent } from './homepage/homepage.component';
 
 const conf: KuiCoreConfig = {
   name: environment.name,
@@ -36,7 +37,8 @@ const conf: KuiCoreConfig = {
   declarations: [
     AppComponent,
     ResourceComponent,
-    SearchResultComponent
+    SearchResultComponent,
+    HomepageComponent
   ],
   imports: [
     BrowserModule,
