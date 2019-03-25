@@ -27,10 +27,6 @@ export class ResourceComponent implements OnInit {
   ngOnInit() {
     this.loading = true;
 
-    this._route.queryParams.subscribe(queryParams => {
-        // console.log(queryParams);
-    });
-
     this._route.params.subscribe((params: Params) => {
         this.iri = params['iri'];
         this.getResource(this.iri);
