@@ -5,7 +5,7 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
 @Component({
   selector: 'mls-resource',
   templateUrl: './resource.component.html',
-  styleUrls: ['./resource.component.sass']
+  styleUrls: ['./resource.component.scss']
 })
 export class ResourceComponent implements OnInit {
 
@@ -107,7 +107,7 @@ export class ResourceComponent implements OnInit {
 
                 return imagesToDisplay;
             }
-        ).reduce(function (prev, curr) {
+        ).reduce((prev, curr) => {
             // transform ReadStillImageFileValue[][] to ReadStillImageFileValue[]
             return prev.concat(curr);
         });

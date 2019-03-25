@@ -1,6 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { ReadResource, OntologyInformation, ExtendedSearchParams, KnoraConstants, SearchService, OntologyCacheService, SearchParamsService, GravsearchGenerationService, ApiServiceError, ApiServiceResult, ConvertJSONLD, ReadResourcesSequence } from '@knora/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
+import {
+    ReadResource,
+    OntologyInformation,
+    ExtendedSearchParams,
+    KnoraConstants,
+    SearchService,
+    OntologyCacheService,
+    SearchParamsService,
+    GravsearchGenerationService,
+    ApiServiceError,
+    ApiServiceResult,
+    ConvertJSONLD,
+    ReadResourcesSequence
+} from '@knora/core';
 
 export interface ListData {
   title: string;
@@ -17,11 +30,12 @@ const jsonld = require('jsonld');
 @Component({
   selector: 'mls-search-result',
   templateUrl: './search-result.component.html',
-  styleUrls: ['./search-result.component.sass']
+  styleUrls: ['./search-result.component.scss']
 })
 export class SearchResultComponent implements OnInit {
 
-  loading: boolean = true;
+    loading = true;
+    errorMessage: any = undefined;
 
     result: ReadResource[] = []; // the results of a search query
     ontologyInfo: OntologyInformation; // ontology information about resource classes and properties present in `result`
@@ -63,7 +77,7 @@ export class SearchResultComponent implements OnInit {
               return;
           } else {
               // assign Gravsearch query
-              this.list.restrictedBy = <string>gravsearch;
+              this.list.restrictedBy = gravsearch as string;
           }
       }
 
@@ -73,7 +87,7 @@ export class SearchResultComponent implements OnInit {
   });
   }
 
-  /**
+    /**
      * Get search result from Knora - 2 cases: simple search and extended search
      */
     getResult() {
@@ -88,6 +102,7 @@ export class SearchResultComponent implements OnInit {
                       this.showNumberOfAllResults,
                       (error: ApiServiceError) => {
                           console.error(error);
+                          this.errorMessage = error as any;
                           // console.log('numberOfAllResults', this.numberOfAllResults);
                       }
                   );
@@ -99,6 +114,7 @@ export class SearchResultComponent implements OnInit {
                   this.processSearchResults, // function pointer
                   (error: ApiServiceError) => {
                       console.error(error);
+                      this.errorMessage = error as any;
                   },
               );
 
@@ -111,6 +127,7 @@ export class SearchResultComponent implements OnInit {
                       this.showNumberOfAllResults,
                       (error: ApiServiceError) => {
                           console.error(error);
+                          this.errorMessage = error as any;
                       }
                   );
           }
@@ -121,11 +138,13 @@ export class SearchResultComponent implements OnInit {
                   this.processSearchResults, // function pointer
                   (error: ApiServiceError) => {
                       console.error(error);
+                      this.errorMessage = error as any;
                   });
 
 
       } else {
           console.error('search mode invalid:', this.list.searchMode);
+          this.errorMessage = `search mode invalid: ${this.list.searchMode}`;
       }
   }
 
@@ -133,7 +152,7 @@ export class SearchResultComponent implements OnInit {
   /**
    * Shows total number of results returned by a count query.
    *
-   * @param {ApiServiceResult} countQueryResult the response to a count query.
+   * @param { ApiServiceResult } countQueryResult the response to a count query.
    */
   private showNumberOfAllResults = (countQueryResult: ApiServiceResult) => {
 
@@ -143,7 +162,7 @@ export class SearchResultComponent implements OnInit {
 
       resPromise.then((compacted) => {
           this.numberOfAllResults = compacted[KnoraConstants.schemaNumberOfItems];
-      }, function (err) {
+      }, (err) => {
           console.error('JSONLD could not be expanded:' + err);
       });
   }
@@ -197,7 +216,7 @@ export class SearchResultComponent implements OnInit {
               }
           );
 
-      }, function (err) {
+      }, (err) => {
 
           console.error('JSONLD could not be expanded:' + err);
       });
