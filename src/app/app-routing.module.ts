@@ -14,8 +14,17 @@ const routes: Routes = [
     component: ResourceComponent
   },
   {
-      path: 'search/:mode/:q',
-      component: SearchResultComponent
+    path: 'search',
+    children: [
+      {
+        path: ':mode/:q/:project',
+        component: SearchResultComponent
+      },
+      {
+        path: ':mode/:q',
+        component: SearchResultComponent
+      }
+    ]
   }
 ];
 
