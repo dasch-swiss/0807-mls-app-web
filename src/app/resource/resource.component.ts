@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ReadResourcesSequence, OntologyInformation, KnoraConstants, ResourceService, ApiServiceError, IncomingService, ImageRegion, StillImageRepresentation, ReadResource, ReadStillImageFileValue, ApiServiceResult, ConvertJSONLD, OntologyCacheService } from '@knora/core';
-import { ActivatedRoute, Router, Params } from '@angular/router';
+import { ActivatedRoute, Router, Params, ParamMap } from '@angular/router';
+import { MlsService } from '../services/mls.service';
+import { Subscription } from 'rxjs';
 
 declare let require: any;
 const jsonld = require('jsonld');
@@ -10,7 +12,7 @@ const jsonld = require('jsonld');
     templateUrl: './resource.component.html',
     styleUrls: ['./resource.component.scss']
 })
-export class ResourceComponent implements OnInit {
+export class ResourceComponent implements OnInit, OnDestroy {
 
     iri: string;
     resource: ReadResource;
@@ -18,12 +20,14 @@ export class ResourceComponent implements OnInit {
     loading = true;
     errorMessage: any;
     KnoraConstants = KnoraConstants;
+    navigationSubscription: Subscription;
 
     constructor(protected _route: ActivatedRoute,
         protected _router: Router,
         protected _resourceService: ResourceService,
         protected _incomingService: IncomingService,
-        private _cacheService: OntologyCacheService
+        private _cacheService: OntologyCacheService,
+        private _mlsService: MlsService
     ) {
         const routeParams = this._route.snapshot.params;
         this.iri = routeParams.id;
@@ -32,14 +36,15 @@ export class ResourceComponent implements OnInit {
     ngOnInit() {
         this.loading = true;
 
-        /*   this._route.paramMap.subscribe(
-              (params: Params) => {
-                  this.iri = decodeURIComponent(params.get('id'));
-                  console.log(this.iri);
-              }
-          ); */
+        this.navigationSubscription = this._route.paramMap.subscribe((params: ParamMap) => {
+            this.getResource(params.get('id'));
+        });
+    }
 
-        this.getResource(this.iri);
+    ngOnDestroy() {
+        if (this.navigationSubscription !== undefined) {
+            this.navigationSubscription.unsubscribe();
+        }
     }
 
     private getResource(iri: string): void {
@@ -48,7 +53,6 @@ export class ResourceComponent implements OnInit {
         this._resourceService.getResource(iri)
             .subscribe(
                 (result: ApiServiceResult) => {
-                    console.log('result: ', result.body);
                     const promises = jsonld.promises;
                     // compact JSON-LD using an empty context: expands all Iris
                     const promise = promises.compact(result.body, {});
@@ -59,7 +63,7 @@ export class ResourceComponent implements OnInit {
 
                         // make sure that exactly one resource is returned
                         if (resourceSeq.resources.length === 1) {
-                            console.log('1 resource');
+
                             // get resource class Iris from response
                             const resourceClassIris: string[] = ConvertJSONLD.getResourceClassesFromJsonLD(compacted);
 
@@ -73,9 +77,9 @@ export class ResourceComponent implements OnInit {
                                     // this.collectImagesAndRegionsForResource(resourceSeq.resources[0]);
 
                                     this.resource = resourceSeq.resources[0];
-                                    console.log('resource: ', this.resource);
+                                    // console.log('resource: ', this.resource);
 
-                                    // this.requestIncomingResources();
+                                    this.requestIncomingResources();
                                 },
                                 (err) => {
 
@@ -96,5 +100,56 @@ export class ResourceComponent implements OnInit {
                     // this.isLoading = false;
                 });
     }
+
+    /**
+     * Requests incoming resources for [[this.resource]].
+     * Incoming resources are: regions, StillImageRepresentations, and incoming links.
+     *
+     **/
+    private requestIncomingResources(): void {
+
+        // make sure that this.resource has been initialized correctly
+        if (this.resource === undefined) {
+            return;
+        }
+
+        // check for incoming links for the current resource
+        this.getIncomingLinks(0);
+
+
+    }
+
+    /**
+     * Get resources pointing to [[this.resource]] with properties other than knora-api:isPartOf and knora-api:isRegionOf.
+     *
+     * @param offset the offset to be used (needed for paging). First request uses an offset of 0.
+     * It takes the number of images returned as an argument.
+     */
+    private getIncomingLinks(offset: number): void {
+
+        this._incomingService.getIncomingLinksForResource(this.resource.id, offset).subscribe(
+            (incomingResources: ReadResourcesSequence) => {
+                // update ontology information
+                this.ontologyInfo.updateOntologyInformation(incomingResources.ontologyInformation);
+
+                // Append elements incomingResources to this.resource.incomingLinks
+                Array.prototype.push.apply(this.resource.incomingLinks, incomingResources.resources);
+            },
+            (error: any) => {
+                this.errorMessage = <any>error;
+                this.loading = false;
+            }
+        );
+    }
+
+    /**
+     * Display incoming links as clickable links
+     *
+     * @param resIri
+     */
+    showIncomingRes(resIri) {
+        this._router.navigateByUrl('resource/' + encodeURIComponent(resIri));
+    }
+
 
 }
