@@ -4,10 +4,7 @@
 
 export const environment = {
   production: false,
-  name: 'Musiklexikon',
-  api: 'http://localhost:3333',
-  app: 'http://localhost:4200',
-  media: 'http://localhost:1024'
+  name: 'dev'
 };
 
 /*
