@@ -4,11 +4,12 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
-import { MatCheckboxModule , MatDividerModule, MatIconModule, MatToolbarModule } from '@angular/material';
+import { MatCheckboxModule, MatDividerModule, MatIconModule, MatToolbarModule, MatListModule } from '@angular/material';
 import { ResourceComponent } from './resource.component';
 import { ProgressIndicatorComponent, KeyPipe } from '@knora/action';
 
-import { BooleanValueComponent,
+import {
+  BooleanValueComponent,
   ColorValueComponent,
   DateValueComponent,
   DecimalValueComponent,
@@ -23,7 +24,7 @@ import { BooleanValueComponent,
   TextfileValueComponent,
   UriValueComponent,
   StillImageComponent
- } from '@knora/viewer';
+} from '@knora/viewer';
 import { of } from 'rxjs';
 import { KuiCoreConfigToken, KuiCoreConfig } from '@knora/core';
 
@@ -38,7 +39,13 @@ describe('ResourceComponent', () => {
       imports: [
         HttpClientModule,
         HttpClientTestingModule,
-        RouterTestingModule, MatCheckboxModule, MatDividerModule, MatIconModule, MatToolbarModule],
+        RouterTestingModule,
+        MatCheckboxModule,
+        MatDividerModule,
+        MatIconModule,
+        MatToolbarModule,
+        MatListModule
+      ],
       declarations: [
         ResourceComponent,
         ProgressIndicatorComponent,
@@ -65,23 +72,23 @@ describe('ResourceComponent', () => {
           provide: KuiCoreConfigToken,
           useValue: KuiCoreConfig
         },
-        {
-            provide: ActivatedRoute,
-            useValue: {
-                params: of({
-                    get: (param: string) => {
-                        if (param === 'iri') {
-                            return iri;
-                        } else {
-                            console.log('no parameters');
-                        }
-                    }
-                })
-            }
-        }
+        /* {
+          provide: ActivatedRoute,
+          useValue: {
+            params: of({
+              get: (param: string) => {
+                if (param === 'id') {
+                  return iri;
+                } else {
+                  console.log('no parameters');
+                }
+              }
+            })
+          }
+        } */
       ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -94,3 +101,4 @@ describe('ResourceComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+

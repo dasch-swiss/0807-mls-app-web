@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ArtikelComponent } from './artikel.component';
+import { KuiViewerModule } from '@knora/viewer';
+import { RouterTestingModule } from '@angular/router/testing';
+import { KuiCoreConfigToken, KuiCoreConfig } from '@knora/core';
 
 describe('ArtikelComponent', () => {
   let component: ArtikelComponent;
@@ -8,9 +11,19 @@ describe('ArtikelComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ArtikelComponent ]
+      imports: [
+        KuiViewerModule,
+        RouterTestingModule
+      ],
+      declarations: [ArtikelComponent],
+      providers: [
+        {
+          provide: KuiCoreConfigToken,
+          useValue: KuiCoreConfig
+        }
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
