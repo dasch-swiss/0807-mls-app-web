@@ -34,7 +34,7 @@ const routes: Routes = [
     component: LemmataComponent
   },
   {
-    path: 'artikel',
+    path: 'article',
     component: ArtikelComponent
   },
   {

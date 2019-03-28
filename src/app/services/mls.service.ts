@@ -18,19 +18,19 @@ export class MlsService {
         CONSTRUCT {
             ?lemma knora-api:isMainResource true .
             
-            ?lemmaLocation mls:hasLLLinkToLemma ?lemma .
+            #?lemmaLocation mls:hasLLLinkToLemma ?lemma .
             
-            ?lemmaLocation mls:hasLLLinkToLocation ?location .
+            #?lemmaLocation mls:hasLLLinkToLocation ?location .
     
         } WHERE {
     
             ?lemma a mls:Lemma .
             
-            ?lemmaLocation mls:hasLLLinkToLemma ?lemma .
+            #?lemmaLocation mls:hasLLLinkToLemma ?lemma .
             
-            ?lemmaLocation mls:hasLLLinkToLocation ?location .
+            #?lemmaLocation mls:hasLLLinkToLocation ?location .
             
-            ?location a mls:Location .
+            #?location a mls:Location .
 
         }
         OFFSET 0
@@ -43,24 +43,22 @@ export class MlsService {
      */
     searchForLexika() {
 
-        console.log('search for lexikon');
-
-        /* const lexikaTemplate = `
+        const lexikaTemplate = `
     PREFIX knora-api: <http://api.knora.org/ontology/knora-api/simple/v2#>
     PREFIX mls: <http://0.0.0.0:3333/ontology/0807/mls/simple/v2#>
     
         CONSTRUCT {
-            ?lekixon knora-api:isMainResource true .
+            ?lexicon knora-api:isMainResource true .
             
     
         } WHERE {
     
-            ?lexikon a mls:Lexikon .
+            ?lexicon a mls:Lexicon .
 
         }
         OFFSET 0
       `;
-        return lexikaTemplate; */
+        return lexikaTemplate;
 
     }
 
@@ -68,21 +66,21 @@ export class MlsService {
      * Gravsearch query to search for artikel data
      */
     searchForArtikel() {
-        console.log('search for artikel');
 
-        /*  const artikelTemplate = `
+        const artikelTemplate = `
      PREFIX knora-api: <http://api.knora.org/ontology/knora-api/simple/v2#>
      PREFIX mls: <http://0.0.0.0:3333/ontology/0807/mls/simple/v2#>
      
          CONSTRUCT {
-            
+            ?article knora-api:isMainResource true .
      
          } WHERE {
+            ?article a mls:Article .
  
          }
          OFFSET 0
        `;
-         return artikelTemplate; */
+        return artikelTemplate;
 
     }
 
