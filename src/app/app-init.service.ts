@@ -33,11 +33,11 @@ export class AppInitService {
             // console.log('AppInitService.init() called');
             // do your initialisation stuff here
 
-            const data = <IAppConfig> window['tempConfigStorage'];
+            const data = <IAppConfig>window['tempConfigStorage'];
             // console.log('AppInitService: json', data);
             AppInitService.settings = data;
 
-            AppInitService.coreConfig = <KuiCoreConfig> {
+            AppInitService.coreConfig = <KuiCoreConfig>{
                 name: AppInitService.settings.appName,
                 api: AppInitService.settings.apiURL,
                 media: AppInitService.settings.iiifURL,

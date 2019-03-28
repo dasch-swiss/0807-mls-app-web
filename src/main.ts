@@ -10,7 +10,11 @@ if (environment.production) {
   enableProdMode();
 }
 
+<<<<<<< Updated upstream
 function bootstrapFailed(result) {
+=======
+function bootstrapFailed(result: any) {
+>>>>>>> Stashed changes
   console.error('bootstrap-fail', result);
 }
 
