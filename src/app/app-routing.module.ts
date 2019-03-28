@@ -1,8 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ResourceComponent } from './resource/resource.component';
-import { SearchResultComponent } from './search-result/search-result.component';
 import { HomepageComponent } from './homepage/homepage.component';
+import { LemmataComponent } from './resource/lemmata/lemmata.component';
+import { ArtikelComponent } from './resource/artikel/artikel.component';
+import { LexikaComponent } from './resource/lexika/lexika.component';
+import { SearchResultsComponent } from '@knora/viewer';
 
 const routes: Routes = [
   {
@@ -10,7 +13,7 @@ const routes: Routes = [
     component: HomepageComponent
   },
   {
-    path: 'resource/:iri',
+    path: 'resource/:id',
     component: ResourceComponent
   },
   {
@@ -18,13 +21,25 @@ const routes: Routes = [
     children: [
       {
         path: ':mode/:q/:project',
-        component: SearchResultComponent
+        component: SearchResultsComponent
       },
       {
         path: ':mode/:q',
-        component: SearchResultComponent
+        component: SearchResultsComponent
       }
     ]
+  },
+  {
+    path: 'lemmata',
+    component: LemmataComponent
+  },
+  {
+    path: 'artikel',
+    component: ArtikelComponent
+  },
+  {
+    path: 'lexika',
+    component: LexikaComponent
   }
 ];
 
