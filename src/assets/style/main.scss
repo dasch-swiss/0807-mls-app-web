@@ -55,3 +55,9 @@
   justify-content: center;
   position: fixed !important;
 }
+
+.kui-progress-indicator {
+    .bounce1, .bounce2, .bounce3 {
+        background-color: $primary_500 !important;
+    }
+}

@@ -28,7 +28,7 @@ export class ResourcesListComponent implements OnInit {
         this.gravsearch = this._mls.searchForLexika();
         break;
       }
-      case 'article': {
+      case 'artikel': {
         this.gravsearch = this._mls.searchForArtikel();
         break;
       }

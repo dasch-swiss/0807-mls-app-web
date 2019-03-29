@@ -32,7 +32,7 @@ const routes: Routes = [
     component: ResourcesListComponent
   },
   {
-    path: 'article',
+    path: 'artikel',
     component: ResourcesListComponent
   },
   {
