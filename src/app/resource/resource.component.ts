@@ -3,6 +3,7 @@ import { ReadResourcesSequence, OntologyInformation, KnoraConstants, ResourceSer
 import { ActivatedRoute, Router, Params, ParamMap } from '@angular/router';
 import { MlsService } from '../services/mls.service';
 import { Subscription } from 'rxjs';
+import { Location } from '@angular/common';
 
 declare let require: any;
 const jsonld = require('jsonld');
@@ -27,7 +28,8 @@ export class ResourceComponent implements OnInit, OnDestroy {
         protected _resourceService: ResourceService,
         protected _incomingService: IncomingService,
         private _cacheService: OntologyCacheService,
-        private _mlsService: MlsService
+        private _mlsService: MlsService,
+        public location: Location
     ) {
         const routeParams = this._route.snapshot.params;
         this.iri = routeParams.id;

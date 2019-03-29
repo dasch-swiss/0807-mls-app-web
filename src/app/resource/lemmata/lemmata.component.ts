@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MlsService } from '../../services/mls.service';
 
@@ -14,7 +15,8 @@ export class LemmataComponent implements OnInit {
   constructor(
     private _router: Router,
     private _route: ActivatedRoute,
-    private _mls: MlsService
+    private _mls: MlsService,
+    public location: Location
   ) { }
 
   ngOnInit() {

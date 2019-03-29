@@ -1,10 +1,17 @@
-<kui-progress-indicator *ngIf="loading"></kui-progress-indicator>
-
-<h2>Metadata for resource {{ resource?.label}}</h2>
-<h3>type: {{ontologyInfo?.getLabelForResourceClass(resource?.type)}}</h3>
-
 <div class="resource-content">
+    <kui-progress-indicator *ngIf="loading"></kui-progress-indicator>
+
+    <button mat-stroked-button class="previousBtn" (click)="location.back()">
+        <mat-icon>arrow_back</mat-icon>
+        Previous
+    </button>
+
+    <h2>Metadata for resource {{ resource?.label}}</h2>
+    <h3>type: {{ontologyInfo?.getLabelForResourceClass(resource?.type)}}</h3>
+
+    <!-- Resource metadata -->
     <div *ngFor="let prop of resource?.properties | kuiKey">
+
         <mat-list>
             <span>{{ontologyInfo?.getLabelForProperty(prop.key)}}</span>
             <mat-list-item *ngFor="let val of prop.value">
@@ -27,18 +34,21 @@
                 </span>
             </mat-list-item>
         </mat-list>
+
+        <!-- Incoming links -->
+        <section>
+            <div *ngIf="resource?.incomingLinks?.length > 0" class="incoming-link-position">
+                <p>
+                    <strong>Referenced in:</strong>
+                </p>
+                <mat-list *ngFor="let incomingLinkSourceRes of resource.incomingLinks">
+                    <mat-list-item>
+                        <span class="link" (click)="showIncomingRes(incomingLinkSourceRes.id)">{{incomingLinkSourceRes.label}}</span>
+                    </mat-list-item>
+                </mat-list>
+            </div>
+        </section>
+
     </div>
 
-    <section>
-        <div *ngIf="resource?.incomingLinks?.length > 0" class="incoming-link-position">
-            <p>
-                <strong>Referenced in:</strong>
-            </p>
-            <mat-list *ngFor="let incomingLinkSourceRes of resource.incomingLinks">
-                <mat-list-item>
-                    <span class="link" (click)="showIncomingRes(incomingLinkSourceRes.id)">{{incomingLinkSourceRes.label}}</span>
-                </mat-list-item>
-            </mat-list>
-        </div>
-    </section>
 </div>
