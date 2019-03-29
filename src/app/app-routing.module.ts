@@ -38,6 +38,18 @@ const routes: Routes = [
   {
     path: 'lexika',
     component: ResourcesListComponent
+  },
+  {
+    path: 'bibliothek',
+    component: ResourcesListComponent
+  },
+  {
+    path: 'ort',
+    component: ResourcesListComponent
+  },
+  {
+    path: 'tatigkeit',
+    component: ResourcesListComponent
   }
 ];
 

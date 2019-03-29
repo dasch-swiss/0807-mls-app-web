@@ -3,11 +3,12 @@ import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-
-import { MatCheckboxModule, MatDividerModule, MatIconModule, MatToolbarModule, MatListModule } from '@angular/material';
+import { of } from 'rxjs';
+import { AppInitService } from '../app-init.service';
+import { MatCheckboxModule, MatDividerModule, MatIconModule, MatTabsModule, MatToolbarModule, MatListModule } from '@angular/material';
 import { ResourceComponent } from './resource.component';
 import { ProgressIndicatorComponent, KeyPipe } from '@knora/action';
-
+import { KuiCoreConfigToken, KuiCoreConfig } from '@knora/core';
 import {
   BooleanValueComponent,
   ColorValueComponent,
@@ -25,8 +26,6 @@ import {
   UriValueComponent,
   StillImageComponent
 } from '@knora/viewer';
-import { of } from 'rxjs';
-import { KuiCoreConfigToken, KuiCoreConfig } from '@knora/core';
 
 describe('ResourceComponent', () => {
   let component: ResourceComponent;
@@ -43,6 +42,7 @@ describe('ResourceComponent', () => {
         MatCheckboxModule,
         MatDividerModule,
         MatIconModule,
+        MatTabsModule,
         MatToolbarModule,
         MatListModule
       ],
@@ -67,25 +67,12 @@ describe('ResourceComponent', () => {
         StillImageComponent
       ],
       providers: [
+        AppInitService,
         HttpClient,
         {
           provide: KuiCoreConfigToken,
           useValue: KuiCoreConfig
-        },
-        /* {
-          provide: ActivatedRoute,
-          useValue: {
-            params: of({
-              get: (param: string) => {
-                if (param === 'id') {
-                  return iri;
-                } else {
-                  console.log('no parameters');
-                }
-              }
-            })
-          }
-        } */
+        }
       ]
     })
       .compileComponents();

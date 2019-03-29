@@ -13,8 +13,8 @@ export class ResourcesListComponent implements OnInit {
   gravsearch: string;
 
   constructor(private _route: ActivatedRoute,
-              private _mls: MlsService,
-              public location: Location) {
+    private _mls: MlsService,
+    public location: Location) {
     this.route = this._route.pathFromRoot[1].snapshot.url[0].path;
   }
 
@@ -30,6 +30,18 @@ export class ResourcesListComponent implements OnInit {
       }
       case 'artikel': {
         this.gravsearch = this._mls.searchForArtikel();
+        break;
+      }
+      case 'bibliothek': {
+        this.gravsearch = this._mls.searchForBibliothek();
+        break;
+      }
+      case 'ort': {
+        this.gravsearch = this._mls.searchForOrt();
+        break;
+      }
+      case 'tatigkeit': {
+        this.gravsearch = this._mls.searchForTatigkeit();
         break;
       }
     }
