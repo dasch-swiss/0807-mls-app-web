@@ -81,7 +81,9 @@ export class ResourceComponent implements OnInit, OnDestroy {
         );
     }
 
-    private getResource(iri: string): void {
+    // old getResource method //
+
+    /* private getResource(iri: string): void {
         iri = decodeURIComponent(iri);
 
         this._resourceService.getResource(iri)
@@ -133,7 +135,7 @@ export class ResourceComponent implements OnInit, OnDestroy {
                     // this.errorMessage = <any>error;
                     // this.isLoading = false;
                 });
-    }
+    } */
 
     /**
      * Requests incoming resources for [[this.resource]].

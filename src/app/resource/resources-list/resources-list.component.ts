@@ -21,27 +21,27 @@ export class ResourcesListComponent implements OnInit {
   ngOnInit() {
     switch (this.route) {
       case 'lemmata': {
-        this.gravsearch = this._mls.searchForLemmata();
+        this.gravsearch = this._mls.searchForLemmata(0);
         break;
       }
       case 'lexika': {
-        this.gravsearch = this._mls.searchForLexika();
+        this.gravsearch = this._mls.searchForLexika(0);
         break;
       }
       case 'artikel': {
-        this.gravsearch = this._mls.searchForArtikel();
+        this.gravsearch = this._mls.searchForArtikel(0);
         break;
       }
       case 'bibliothek': {
-        this.gravsearch = this._mls.searchForBibliothek();
+        this.gravsearch = this._mls.searchForBibliothek(0);
         break;
       }
       case 'ort': {
-        this.gravsearch = this._mls.searchForOrt();
+        this.gravsearch = this._mls.searchForOrt(0);
         break;
       }
       case 'tatigkeit': {
-        this.gravsearch = this._mls.searchForTatigkeit();
+        this.gravsearch = this._mls.searchForTatigkeit(0);
         break;
       }
     }

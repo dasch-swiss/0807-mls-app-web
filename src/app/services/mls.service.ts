@@ -1,17 +1,20 @@
 import { Injectable } from '@angular/core';
 import { AppInitService } from '../app-init.service';
+import { SearchParamsService, ExtendedSearchParams } from '@knora/core';
 
 @Injectable({
     providedIn: 'root'
 })
 export class MlsService {
 
-    constructor(private _appInitService: AppInitService) { }
+    constructor(
+        private _appInitService: AppInitService,
+        private _searchParamsService: SearchParamsService) { }
 
     /**
      * Gravsearch query to search for lemma data and associated data: location and occupation
      */
-    searchForLemmata() {
+    searchForLemmata(offset: number = 0): string {
         const lemmataTemplate = `
     PREFIX knora-api: <http://api.knora.org/ontology/knora-api/simple/v2#>
     PREFIX mls: <${this._appInitService.getSettings().ontologyIRI}/ontology/0807/mls/simple/v2#>
@@ -34,15 +37,33 @@ export class MlsService {
             #?location a mls:Location .
 
         }
-        OFFSET 0
       `;
-        return lemmataTemplate;
+
+        // offset component of the Gravsearch query
+        const offsetTemplate = `
+        OFFSET ${offset}
+        `;
+
+        // function that generates the same Gravsearch query with the given offset
+        const generateGravsearchWithCustomOffset = (localOffset: number): string => {
+            const offsetCustomTemplate = `
+            OFFSET ${localOffset}
+            `;
+
+            return lemmataTemplate + offsetCustomTemplate;
+        };
+
+        if (offset === 0) {
+            // store the function so another Gravsearch query can be created with an increased offset
+            this._searchParamsService.changeSearchParamsMsg(new ExtendedSearchParams(generateGravsearchWithCustomOffset));
+        }
+        return lemmataTemplate + offsetTemplate;
     }
 
     /**
      * Gravsearch query to search for lexika data
      */
-    searchForLexika() {
+    searchForLexika(offset: number = 0): string {
 
         const lexikaTemplate = `
     PREFIX knora-api: <http://api.knora.org/ontology/knora-api/simple/v2#>
@@ -57,16 +78,33 @@ export class MlsService {
             ?lexicon a mls:Lexicon .
 
         }
-        OFFSET 0
       `;
-        return lexikaTemplate;
 
+        // offset component of the Gravsearch query
+        const offsetTemplate = `
+        OFFSET ${offset}
+        `;
+
+        // function that generates the same Gravsearch query with the given offset
+        const generateGravsearchWithCustomOffset = (localOffset: number): string => {
+            const offsetCustomTemplate = `
+            OFFSET ${localOffset}
+            `;
+
+            return lexikaTemplate + offsetCustomTemplate;
+        };
+
+        if (offset === 0) {
+            // store the function so another Gravsearch query can be created with an increased offset
+            this._searchParamsService.changeSearchParamsMsg(new ExtendedSearchParams(generateGravsearchWithCustomOffset));
+        }
+        return lexikaTemplate + offsetTemplate;
     }
 
     /**
      * Gravsearch query to search for artikel data
      */
-    searchForArtikel() {
+    searchForArtikel(offset: number = 0): string {
 
         const artikelTemplate = `
      PREFIX knora-api: <http://api.knora.org/ontology/knora-api/simple/v2#>
@@ -80,16 +118,32 @@ export class MlsService {
             ?article a mls:Article .
 
          }
-         OFFSET 0
        `;
-        return artikelTemplate;
+        // offset component of the Gravsearch query
+        const offsetTemplate = `
+         OFFSET ${offset}
+         `;
 
+        // function that generates the same Gravsearch query with the given offset
+        const generateGravsearchWithCustomOffset = (localOffset: number): string => {
+            const offsetCustomTemplate = `
+             OFFSET ${localOffset}
+             `;
+
+            return artikelTemplate + offsetCustomTemplate;
+        };
+
+        if (offset === 0) {
+            // store the function so another Gravsearch query can be created with an increased offset
+            this._searchParamsService.changeSearchParamsMsg(new ExtendedSearchParams(generateGravsearchWithCustomOffset));
+        }
+        return artikelTemplate + offsetTemplate;
     }
 
     /**
      * Gravsearch query to search for bibliothek data
      */
-    searchForBibliothek() {
+    searchForBibliothek(offset: number = 0): string {
 
         const bibliothekTemplate = `
     PREFIX knora-api: <http://api.knora.org/ontology/knora-api/simple/v2#>
@@ -102,17 +156,33 @@ export class MlsService {
             ?bibliothek a knora-api:Resource .
             ?bibliothek a mls:Library .
             
-        } 
-        OFFSET 0
+        }
       `;
-        return bibliothekTemplate;
+        // offset component of the Gravsearch query
+        const offsetTemplate = `
+        OFFSET ${offset}
+        `;
 
+        // function that generates the same Gravsearch query with the given offset
+        const generateGravsearchWithCustomOffset = (localOffset: number): string => {
+            const offsetCustomTemplate = `
+            OFFSET ${localOffset}
+            `;
+
+            return bibliothekTemplate + offsetCustomTemplate;
+        };
+
+        if (offset === 0) {
+            // store the function so another Gravsearch query can be created with an increased offset
+            this._searchParamsService.changeSearchParamsMsg(new ExtendedSearchParams(generateGravsearchWithCustomOffset));
+        }
+        return bibliothekTemplate + offsetTemplate;
     }
 
     /**
      * Gravsearch query to search for location data
      */
-    searchForOrt() {
+    searchForOrt(offset: number = 0): string {
 
         const ortTemplate = `
     PREFIX knora-api: <http://api.knora.org/ontology/knora-api/simple/v2#>
@@ -127,17 +197,34 @@ export class MlsService {
             ?ort a knora-api:Resource .
             ?ort a mls:Location .
             
-        } 
-        OFFSET 0
+        }
       `;
-        return ortTemplate;
+        // offset component of the Gravsearch query
+        const offsetTemplate = `
+        OFFSET ${offset}
+        `;
+
+        // function that generates the same Gravsearch query with the given offset
+        const generateGravsearchWithCustomOffset = (localOffset: number): string => {
+            const offsetCustomTemplate = `
+            OFFSET ${localOffset}
+            `;
+
+            return ortTemplate + offsetCustomTemplate;
+        };
+
+        if (offset === 0) {
+            // store the function so another Gravsearch query can be created with an increased offset
+            this._searchParamsService.changeSearchParamsMsg(new ExtendedSearchParams(generateGravsearchWithCustomOffset));
+        }
+        return ortTemplate + offsetTemplate;
 
     }
 
     /**
      * Gravsearch query to search for occupation data
      */
-    searchForTatigkeit() {
+    searchForTatigkeit(offset: number = 0): string {
 
         const tatigkeitTemplate = `
     PREFIX knora-api: <http://api.knora.org/ontology/knora-api/simple/v2#>
@@ -152,10 +239,27 @@ export class MlsService {
             ?tatigkeit a knora-api:Resource .
             ?tatigkeit a mls:Occupation .
             
-        } 
-        OFFSET 0
+        }
       `;
-        return tatigkeitTemplate;
+        // offset component of the Gravsearch query
+        const offsetTemplate = `
+        OFFSET ${offset}
+        `;
+
+        // function that generates the same Gravsearch query with the given offset
+        const generateGravsearchWithCustomOffset = (localOffset: number): string => {
+            const offsetCustomTemplate = `
+            OFFSET ${localOffset}
+            `;
+
+            return tatigkeitTemplate + offsetCustomTemplate;
+        };
+
+        if (offset === 0) {
+            // store the function so another Gravsearch query can be created with an increased offset
+            this._searchParamsService.changeSearchParamsMsg(new ExtendedSearchParams(generateGravsearchWithCustomOffset));
+        }
+        return tatigkeitTemplate + offsetTemplate;
 
     }
 
