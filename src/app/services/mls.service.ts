@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {AppInitService} from '../app-init.service';
+import { AppInitService } from '../app-init.service';
 
 @Injectable({
     providedIn: 'root'
@@ -24,7 +24,7 @@ export class MlsService {
             #?lemmaLocation mls:hasLLLinkToLocation ?location .
 
         } WHERE {
-
+            ?lemma a knora-api:Resource .
             ?lemma a mls:Lemma .
 
             #?lemmaLocation mls:hasLLLinkToLemma ?lemma .
@@ -53,7 +53,7 @@ export class MlsService {
 
 
         } WHERE {
-
+            ?lexicon a knora-api:Resource .
             ?lexicon a mls:Lexicon .
 
         }
@@ -76,6 +76,7 @@ export class MlsService {
             ?article knora-api:isMainResource true .
 
          } WHERE {
+            ?article a knora-api:Resource .
             ?article a mls:Article .
 
          }
