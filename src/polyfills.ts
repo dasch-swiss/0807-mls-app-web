@@ -52,9 +52,6 @@
  *
  */
 
-// fix issue: angular 6 providing global object; followed the solution here:
-// https://aws.github.io/aws-amplify/media/angular_guide#angular-6-support
-(window as any).global = window;
 
 /***************************************************************************************************
  * Zone JS is required by default for Angular itself.
@@ -65,3 +62,6 @@ import 'zone.js/dist/zone';  // Included with Angular CLI.
 /***************************************************************************************************
  * APPLICATION IMPORTS
  */
+// fix issue: angular 6 providing global object; followed the solution here:
+// https://aws.github.io/aws-amplify/media/angular_guide#angular-6-support
+(window as any).global = window;

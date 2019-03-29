@@ -86,4 +86,33 @@ export class MlsService {
 
     }
 
+    /** FOR testing only!!!
+     * Gravsearch query to search for artikel data
+     */
+    searchForDing() {
+
+        const artikelTemplate = `PREFIX knora-api: <http://api.knora.org/ontology/knora-api/simple/v2#>
+        CONSTRUCT {
+
+        ?mainRes knora-api:isMainResource true .
+
+
+
+        } WHERE {
+
+        ?mainRes a knora-api:Resource .
+
+        ?mainRes a <http://0.0.0.0:3333/ontology/0803/incunabula/simple/v2#page> .
+
+
+
+        }
+
+        OFFSET 0
+       `;
+        return artikelTemplate;
+
+    }
+
+
 }

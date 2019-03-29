@@ -22,10 +22,8 @@ import { AppComponent } from './app.component';
 import { ResourceComponent } from './resource/resource.component';
 import { SearchResultComponent } from './search-result/search-result.component';
 import { HomepageComponent } from './homepage/homepage.component';
-import { LemmataComponent } from './resource/lemmata/lemmata.component';
-import { LexikaComponent } from './resource/lexika/lexika.component';
-import { ArtikelComponent } from './resource/artikel/artikel.component';
 import { AppInitService } from './app-init.service';
+import { ResourcesListComponent } from './resource/resources-list/resources-list.component';
 
 export function initializeApp(appInitService: AppInitService) {
   return (): Promise<any> => {
@@ -39,9 +37,7 @@ export function initializeApp(appInitService: AppInitService) {
     ResourceComponent,
     SearchResultComponent,
     HomepageComponent,
-    LemmataComponent,
-    LexikaComponent,
-    ArtikelComponent
+    ResourcesListComponent
   ],
   imports: [
     BrowserModule,
