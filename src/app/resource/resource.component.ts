@@ -15,6 +15,8 @@ const jsonld = require('jsonld');
 })
 export class ResourceComponent implements OnInit, OnDestroy {
 
+    sequence: ReadResourcesSequence;
+
     iri: string;
     resource: ReadResource;
     ontologyInfo: OntologyInformation;
@@ -39,7 +41,8 @@ export class ResourceComponent implements OnInit, OnDestroy {
         this.loading = true;
 
         this.navigationSubscription = this._route.paramMap.subscribe((params: ParamMap) => {
-            this.getResource(params.get('id'));
+            // this.getResource(params.get('id'));
+            this.getResourceSequence(params.get('id'));
         });
     }
 
@@ -47,6 +50,35 @@ export class ResourceComponent implements OnInit, OnDestroy {
         if (this.navigationSubscription !== undefined) {
             this.navigationSubscription.unsubscribe();
         }
+    }
+
+    getResourceSequence(id: string) {
+        this._resourceService.getReadResource(decodeURIComponent(id)).subscribe(
+            (result: ReadResourcesSequence) => {
+                this.sequence = result;
+
+                this.ontologyInfo = result.ontologyInformation;
+
+                // collect images and regions
+                // this.collectImagesAndRegionsForResource(this.sequence.resources[0]);
+
+                // get incoming resources
+                this.requestIncomingResources();
+
+
+                // this.fileRepresentation = this.sequence.resources[0].properties.indexOf(KnoraConstants.hasStillImageFileValue) > -1;
+                // console.log(this.fileRepresentation);
+
+                // wait until the resource is ready
+                setTimeout(() => {
+                    // console.log(this.sequence);
+                    this.loading = false;
+                }, 3000);
+            },
+            (error: ApiServiceError) => {
+                console.error(error);
+            }
+        );
     }
 
     private getResource(iri: string): void {
