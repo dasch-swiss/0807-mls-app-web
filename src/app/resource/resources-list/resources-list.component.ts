@@ -40,8 +40,8 @@ export class ResourcesListComponent implements OnInit {
         this.gravsearch = this._mls.searchForOrt(0);
         break;
       }
-      case 'tatigkeit': {
-        this.gravsearch = this._mls.searchForTatigkeit(0);
+      case 'taetigkeit': {
+        this.gravsearch = this._mls.searchForTaetigkeit(0);
         break;
       }
     }

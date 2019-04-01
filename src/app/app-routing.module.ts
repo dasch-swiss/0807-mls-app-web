@@ -49,7 +49,7 @@ const routes: Routes = [
     component: ResourcesListComponent
   },
   {
-    path: 'tatigkeit',
+    path: 'taetigkeit',
     component: ResourcesListComponent
   },
   {
