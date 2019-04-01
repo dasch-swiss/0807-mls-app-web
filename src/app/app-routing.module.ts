@@ -4,6 +4,7 @@ import { ResourceComponent } from './resource/resource.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { SearchResultsComponent } from '@knora/viewer';
 import { ResourcesListComponent } from './resource/resources-list/resources-list.component';
+import { ErrorComponent } from './error/error.component';
 
 const routes: Routes = [
   {
@@ -50,6 +51,11 @@ const routes: Routes = [
   {
     path: 'tatigkeit',
     component: ResourcesListComponent
+  },
+  {
+    path: '**',
+    component: ErrorComponent,
+    data: { status: 404 }
   }
 ];
 

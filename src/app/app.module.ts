@@ -24,6 +24,7 @@ import { SearchResultComponent } from './search-result/search-result.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { AppInitService } from './app-init.service';
 import { ResourcesListComponent } from './resource/resources-list/resources-list.component';
+import { ErrorComponent } from './error/error.component';
 
 export function initializeApp(appInitService: AppInitService) {
   return (): Promise<any> => {
@@ -37,7 +38,8 @@ export function initializeApp(appInitService: AppInitService) {
     ResourceComponent,
     SearchResultComponent,
     HomepageComponent,
-    ResourcesListComponent
+    ResourcesListComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,
