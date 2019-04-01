@@ -22,6 +22,8 @@ export class MlsService {
         CONSTRUCT {
             ?lemma knora-api:isMainResource true .
 
+            ?lemma mls:hasLemmaText ?text .
+
             #?lemmaLocation mls:hasLLLinkToLemma ?lemma .
 
             #?lemmaLocation mls:hasLLLinkToLocation ?location .
@@ -29,6 +31,8 @@ export class MlsService {
         } WHERE {
             ?lemma a knora-api:Resource .
             ?lemma a mls:Lemma .
+
+            ?lemma mls:hasLemmaText ?text .
 
             #?lemmaLocation mls:hasLLLinkToLemma ?lemma .
 
