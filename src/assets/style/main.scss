@@ -12,13 +12,34 @@
    margin: 0;
  }
 
-.app-content {
+// desktop screen size: bigger than a tablet
+@media screen and (min-width: 768px) {
+  .app-content {
     .container,
     kui-search-results {
         width: 640px;
-        margin: 0 auto;
+        margin-top: 54px;
+        margin-bottom: 0;
+        margin-right: auto;
+        margin-left: auto;
         display: block;
     }
+  }
+}
+
+// mobile device: tablet and smaller than a tablet
+@media screen and (max-width: 768px) {
+  .app-content {
+    .container,
+    kui-search-results {
+       //  width: 640px;
+        margin-top: 54px;
+        margin-bottom: 0;
+        margin-right: auto;
+        margin-left: auto;
+        display: block;
+    }
+  }
 }
 
  .fill-remaining-space {

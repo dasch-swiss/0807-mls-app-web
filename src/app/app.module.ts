@@ -6,6 +6,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 // style / design
 import { MaterialModule } from './material-module';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 // knora-ui modules
 import { KuiCoreConfig, KuiCoreModule, ReadTextValueAsHtml, KuiCoreConfigToken } from '@knora/core';
@@ -48,6 +49,7 @@ export function initializeApp(appInitService: AppInitService) {
     ReactiveFormsModule,
     MaterialModule,
     NoopAnimationsModule,
+    FlexLayoutModule,
     KuiCoreModule,
     KuiAuthenticationModule,
     KuiActionModule,
