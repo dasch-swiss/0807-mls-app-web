@@ -24,6 +24,7 @@ import { SearchResultComponent } from './search-result/search-result.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { AppInitService } from './app-init.service';
 import { ResourcesListComponent } from './resource/resources-list/resources-list.component';
+import { SearchResultsComponent } from './search-results/search-results.component';
 import { ErrorComponent } from './error/error.component';
 
 export function initializeApp(appInitService: AppInitService) {
@@ -39,6 +40,7 @@ export function initializeApp(appInitService: AppInitService) {
     SearchResultComponent,
     HomepageComponent,
     ResourcesListComponent,
+    SearchResultsComponent,
     ErrorComponent
   ],
   imports: [
