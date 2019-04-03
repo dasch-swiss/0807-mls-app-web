@@ -9,7 +9,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 // knora-ui modules
-import { KuiCoreConfig, KuiCoreModule, ReadTextValueAsHtml, KuiCoreConfigToken } from '@knora/core';
+import { KuiCoreConfig, KuiCoreModule, KuiCoreConfigToken } from '@knora/core';
 import { KuiActionModule } from '@knora/action';
 import { KuiSearchModule } from '@knora/search';
 import { KuiViewerModule } from '@knora/viewer';

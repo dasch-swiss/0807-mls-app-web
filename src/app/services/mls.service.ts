@@ -34,10 +34,10 @@ export class MlsService {
 
             ?lemma mls:hasLemmaText ?text .
 
-            #?lemmaLocation mls:hasLLLinkToLemma ?lemma .
+            #OPTIONAL { ?lemmaLocation mls:hasLLLinkToLemma ?lemma . }
 
-            #?lemmaLocation mls:hasLLLinkToLocation ?location .
-
+            #OPTIONAL { ?lemmaLocation mls:hasLLLinkToLocation ?location . }
+            
             #?location a mls:Location .
 
         }
@@ -228,20 +228,20 @@ export class MlsService {
     /**
      * Gravsearch query to search for occupation data
      */
-    searchForTatigkeit(offset: number = 0): string {
+    searchForTaetigkeit(offset: number = 0): string {
 
-        const tatigkeitTemplate = `
+        const taetigkeitTemplate = `
     PREFIX knora-api: <http://api.knora.org/ontology/knora-api/simple/v2#>
     PREFIX mls: <${this._appInitService.getSettings().ontologyIRI}/ontology/0807/mls/simple/v2#>
 
         CONSTRUCT {
-            ?tatigkeit knora-api:isMainResource true .
+            ?taetigkeit knora-api:isMainResource true .
             
 
         } WHERE {
 
-            ?tatigkeit a knora-api:Resource .
-            ?tatigkeit a mls:Occupation .
+            ?taetigkeit a knora-api:Resource .
+            ?taetigkeit a mls:Occupation .
             
         }
       `;
@@ -256,14 +256,14 @@ export class MlsService {
             OFFSET ${localOffset}
             `;
 
-            return tatigkeitTemplate + offsetCustomTemplate;
+            return taetigkeitTemplate + offsetCustomTemplate;
         };
 
         if (offset === 0) {
             // store the function so another Gravsearch query can be created with an increased offset
             this._searchParamsService.changeSearchParamsMsg(new ExtendedSearchParams(generateGravsearchWithCustomOffset));
         }
-        return tatigkeitTemplate + offsetTemplate;
+        return taetigkeitTemplate + offsetTemplate;
 
     }
 
