@@ -20,7 +20,6 @@ import { AppRoutingModule } from './app-routing.module';
 // Components, Services, Directives and Pipes
 import { AppComponent } from './app.component';
 import { ResourceComponent } from './resource/resource.component';
-import { SearchResultComponent } from './search-result/search-result.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { AppInitService } from './app-init.service';
 import { ResourcesListComponent } from './resource/resources-list/resources-list.component';
@@ -37,7 +36,6 @@ export function initializeApp(appInitService: AppInitService) {
   declarations: [
     AppComponent,
     ResourceComponent,
-    SearchResultComponent,
     HomepageComponent,
     ResourcesListComponent,
     SearchResultsComponent,
