@@ -8,7 +8,7 @@ import { MaterialModule } from './material-module';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 // knora-ui modules
-import { KuiCoreConfig, KuiCoreModule, ReadTextValueAsHtml, KuiCoreConfigToken } from '@knora/core';
+import { KuiCoreConfig, KuiCoreModule, KuiCoreConfigToken } from '@knora/core';
 import { KuiActionModule } from '@knora/action';
 import { KuiSearchModule } from '@knora/search';
 import { KuiViewerModule } from '@knora/viewer';
