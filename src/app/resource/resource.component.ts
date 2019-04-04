@@ -1,12 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ReadResourcesSequence, OntologyInformation, KnoraConstants, ResourceService, ApiServiceError, IncomingService, ImageRegion, StillImageRepresentation, ReadResource, ReadStillImageFileValue, ApiServiceResult, ConvertJSONLD, OntologyCacheService, ReadLinkValue } from '@knora/core';
-import { ActivatedRoute, Router, Params, ParamMap } from '@angular/router';
-import { MlsService } from '../services/mls.service';
-import { Subscription, Observable, interval } from 'rxjs';
+import { ReadResourcesSequence, OntologyInformation, KnoraConstants, ResourceService, ApiServiceError, IncomingService, ReadResource, ReadLinkValue } from '@knora/core';
+import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { Location } from '@angular/common';
 
-declare let require: any;
-const jsonld = require('jsonld');
 
 @Component({
     selector: 'mls-resource',
@@ -23,12 +19,10 @@ export class ResourceComponent implements OnInit {
     KnoraConstants = KnoraConstants;
 
     constructor(protected _route: ActivatedRoute,
-        protected _router: Router,
-        protected _resourceService: ResourceService,
-        protected _incomingService: IncomingService,
-        private _cacheService: OntologyCacheService,
-        private _mlsService: MlsService,
-        public location: Location
+                protected _router: Router,
+                protected _resourceService: ResourceService,
+                protected _incomingService: IncomingService,
+                public location: Location
     ) {
         const routeParams = this._route.snapshot.params;
         this.iri = routeParams.id;
@@ -44,7 +38,7 @@ export class ResourceComponent implements OnInit {
 
     /**
      * Get a resource by id with the ontology information and the incoming links
-     * 
+     *
      * @param id resource id - get from the url parameters
      */
     getResource(id: string) {
@@ -108,9 +102,9 @@ export class ResourceComponent implements OnInit {
     /**
      * Display incoming links as clickable links
      *
-     * @param resIri
+     * @param resIri IRI of the resource
      */
-    showIncomingRes(resIri) {
+    showIncomingRes(resIri: string) {
 
         this._router.navigateByUrl('resource/' + encodeURIComponent(resIri));
 

@@ -6,6 +6,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 // style / design
 import { MaterialModule } from './material-module';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 // knora-ui modules
 import { KuiCoreConfig, KuiCoreModule, KuiCoreConfigToken } from '@knora/core';
@@ -20,10 +21,10 @@ import { AppRoutingModule } from './app-routing.module';
 // Components, Services, Directives and Pipes
 import { AppComponent } from './app.component';
 import { ResourceComponent } from './resource/resource.component';
-import { SearchResultComponent } from './search-result/search-result.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { AppInitService } from './app-init.service';
 import { ResourcesListComponent } from './resource/resources-list/resources-list.component';
+import { SearchResultsComponent } from './search-results/search-results.component';
 import { ErrorComponent } from './error/error.component';
 
 export function initializeApp(appInitService: AppInitService) {
@@ -36,9 +37,9 @@ export function initializeApp(appInitService: AppInitService) {
   declarations: [
     AppComponent,
     ResourceComponent,
-    SearchResultComponent,
     HomepageComponent,
     ResourcesListComponent,
+    SearchResultsComponent,
     ErrorComponent
   ],
   imports: [
@@ -48,6 +49,7 @@ export function initializeApp(appInitService: AppInitService) {
     ReactiveFormsModule,
     MaterialModule,
     NoopAnimationsModule,
+    FlexLayoutModule,
     KuiCoreModule,
     KuiAuthenticationModule,
     KuiActionModule,
