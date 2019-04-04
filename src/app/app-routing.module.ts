@@ -50,8 +50,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    component: ErrorComponent,
-    data: { status: 404 }
+    component: ErrorComponent
   }
 ];
 
