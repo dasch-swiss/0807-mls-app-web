@@ -1,6 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SearchResultsComponent } from './search-results.component';
+import { KuiViewerModule } from '@knora/viewer';
+import { ActivatedRoute } from '@angular/router';
+import { KuiCoreConfigToken, KuiCoreConfig } from '@knora/core';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('SearchResultsComponent', () => {
   let component: SearchResultsComponent;
@@ -8,9 +12,16 @@ describe('SearchResultsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SearchResultsComponent ]
+      imports: [KuiViewerModule, RouterTestingModule],
+      declarations: [SearchResultsComponent],
+      providers: [
+        {
+          provide: KuiCoreConfigToken,
+          useValue: KuiCoreConfig
+        }
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
